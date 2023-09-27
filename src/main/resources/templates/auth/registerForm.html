@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${#strings.capitalize(mode) + ' Form'}"></title>
+    <span th:replace="~{home :: bootstrapImports}"></span>
+</head>
+<body>
+<main>
+    <h1><span th:text="${#strings.capitalize(mode)}"></span> Yourself</h1>
+    <hr>
+    <form class="container" action="#" th:action="@{/auth/{mode}(mode=${mode})}" method="post" th:object="${formValues}">
+        <div>
+            <label class="form-label" for="email">Email:</label>
+            <input class="form-control" type="email" id="email" required th:field="*{email}">
+            <span th:if="${#fields.hasErrors('email')}">Invalid Email</span>
+        </div>
+        <div>
+            <label class="form-label" for="password">Password:</label>
+            <input class="form-control" type="password" id="password" required th:field="*{password}">
+            <span th:if="${#fields.hasErrors('password')}">Invalid Password</span>
+        </div>
+        <div>
+            <button class="btn btn-success">Submit</button>
+        </div>
+    </form>
+</main>
+</body>
+</html>
